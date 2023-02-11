@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MoveCamera : InputController
+public class MainCameraController : InputController
 {
 
     Vector3 playerInput = new Vector3(0,0,0);

@@ -5,9 +5,9 @@ using UnityEngine;
 public abstract class InputController : MonoBehaviour
 {
     #region variables
-    float xSensitivity, ySensivity, mouseScrollWheel;
-    float mouseSensitivity = 150;
-
+    float xInput, zInput, mouseScrollWheel;
+    protected float mouseSensitivity = 150;
+    Vector3 cameraVelocity = new Vector3();
     
     #endregion
 
@@ -27,24 +27,24 @@ public abstract class InputController : MonoBehaviour
 
     //Get the keyboard input and return it to a Vector3
     public Vector3 GetKeyboardInput() {
-        Vector3 cameraVelocity = new Vector3();
-
-
+        
         if(Input.GetKey(KeyCode.W)) {
-            cameraVelocity = new Vector3(0,0,1);
+            zInput = 1;
         }
         else if(Input.GetKey(KeyCode.S)) {
-            cameraVelocity = new Vector3(0,0,-1);
+            zInput = -1;
         }
         else if(Input.GetKey(KeyCode.A)) {
-            cameraVelocity = new Vector3(-1,0,0);
+            xInput = -1;
         }
         else if(Input.GetKey(KeyCode.D)) {
-            cameraVelocity = new Vector3(1,0,0);
+            xInput = 1;
         }
         else {
-            cameraVelocity = new Vector3(0,0,0);
+            xInput = 0;
+            zInput = 0;
         }
+        cameraVelocity = new Vector3(xInput,0,zInput);
         return cameraVelocity;
     }
 
