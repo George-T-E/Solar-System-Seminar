@@ -7,7 +7,10 @@ public class GameManager : MonoBehaviour
     public static GameManager _instance;
     public List<AudioClip> clickSounds = new List<AudioClip>();
     AudioSource audioSource;
-    public GameObject mainCam, planetCam, currentSelectedPlanet;
+    public GameObject 
+        mainCam,
+        planetCam,
+        currentSelectedPlanet;
     public Transform mainCamStartLoc;
 
     public Camera currentActiveCamera;
@@ -53,6 +56,7 @@ public class GameManager : MonoBehaviour
                 {
                     if(target == hit.collider.gameObject.transform) return;
                     target = hit.collider.gameObject.transform;
+                    currentSelectedPlanet = target.gameObject;
                     mainCam.SetActive(false);
                     planetCam.SetActive(true);
                     PlanetCameraController pCamController = planetCam.GetComponent<PlanetCameraController>();
