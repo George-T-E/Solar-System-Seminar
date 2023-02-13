@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
         mainCam = Camera.main.gameObject;
         currentActiveCamera = mainCam.GetComponent<Camera>();
         if(planetCam == null)Debug.LogError("Planet cam is NULL!");
+        audioSource = planetCam.GetComponent<AudioSource>();
     }
 
     void Update() {
@@ -35,44 +36,40 @@ public class GameManager : MonoBehaviour
             planetCam.SetActive(false);
             mainCam.SetActive(true);
             currentActiveCamera = mainCam.GetComponent<Camera>();
-            audioSource = mainCam.GetComponent<AudioSource>();
         }
     }
 
     //Throw a raycast and check if it's a planet, if it's a planet camera will look at it and will play a short sound
-    public void SwapCameraOnPlanetClick() {
-
-        if(Input.GetMouseButtonDown(0)) {
+    public void SwapCameraOnPlanetClick()
+    {
+        if(Input.GetMouseButtonDown(0))
+        {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hit;
 
-            if(Physics.Raycast(ray, out hit)) {
-                
-                if(hit.collider.gameObject.CompareTag("SpaceObject")) {
-
-                    // Debug.Log($"{hit.collider.name} Space Object Selected", hit.collider.gameObject);
-                    
+            if(Physics.Raycast(ray, out hit))
+            {
+                if(hit.collider.gameObject.CompareTag("SpaceObject"))
+                {
+                    if(target == hit.collider.gameObject.transform) return;
                     target = hit.collider.gameObject.transform;
-                    currentSelectedPlanet = target.gameObject;
-                    planetCam.transform.LookAt(target);
                     mainCam.SetActive(false);
                     planetCam.SetActive(true);
                     PlanetCameraController pCamController = planetCam.GetComponent<PlanetCameraController>();
                     currentActiveCamera = planetCam.GetComponent<Camera>();
                     pCamController.ChangeTarget(target);
-                    
 
-                    audioSource = planetCam.GetComponent<AudioSource>();
-                    int randomRange;
-                    randomRange = Random.Range(0,1);
-                    if(clickSounds[randomRange] != null)audioSource.PlayOneShot(clickSounds[randomRange]);
+                    int randomRange = Random.Range(0,1);
+                    PlayAudio(randomRange);
                 }
-                else {
-                    Debug.Log("The object you collided with is not a SpaceObject" + hit.collider.gameObject);
-                }         
             }
         }
     }
 
-
+    //give it id of a sound and it will play it
+    public void PlayAudio(int track)
+    {
+        if(clickSounds[track] == null)Debug.Log("The audio file is null");
+        audioSource.PlayOneShot(clickSounds[track]);
+    }
 }
