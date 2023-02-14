@@ -1,48 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static GameManager _instance;
+    /*
+        A listener is an object that listens for events and performs some action in response to them.
+        In C#, delegates are often used to implement event listeners.
+        An event publisher defines an event using a delegate,
+        and event subscribers can then register methods to be called when the event is triggered.
+    */
+    /*
+        Ένας ακροατής είναι ένα αντικείμενο που ακούει για συμβάντα και εκτελεί κάποια ενέργεια ως απόκριση σε αυτά.
+        Στη C#, οι εκπρόσωποι χρησιμοποιούνται συχνά για την υλοποίηση ακροατών συμβάντων.
+        Ένας εκδότης συμβάντος ορίζει ένα συμβάν χρησιμοποιώντας μια αντιπροσωπεία,
+        και οι συνδρομητές συμβάντων μπορούν στη συνέχεια να καταχωρίσουν μεθόδους που θα κληθούν όταν ενεργοποιηθεί το συμβάν.
+    */
+    #region variables
+    public delegate void ObjectClickedAction(GameObject obj);
+    public static event ObjectClickedAction OnObjectClicked;
+
+    [SerializeField]private GameObject cameraSystem;
     public List<AudioClip> clickSounds = new List<AudioClip>();
     AudioSource audioSource;
-    public GameObject 
-        mainCam,
-        planetCam,
-        currentSelectedPlanet;
+    public GameObject targetedPlanet;
     public Transform mainCamStartLoc;
 
-    public Camera currentActiveCamera;
-
+    [SerializeField]ICinemachineCamera activeVirtualCamera;
     Transform target;
-    private void Awake() {
-        if(_instance == null) _instance = this;
-    }
-    // Start is called before the first frame update
+    #endregion
+
     void Start()
     {
-        mainCam = Camera.main.gameObject;
-        currentActiveCamera = mainCam.GetComponent<Camera>();
-        if(planetCam == null)Debug.LogError("Planet cam is NULL!");
-        audioSource = planetCam.GetComponent<AudioSource>();
+        activeVirtualCamera = CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera;
     }
 
-    void Update() {
-        ResetCamera();
+    void Update()
+    {
         SwapCameraOnPlanetClick();
     }
 
-    public void ResetCamera() {
-        if(Input.GetKeyDown(KeyCode.R)) {
-            mainCam.transform.position = mainCamStartLoc.position;
-            planetCam.SetActive(false);
-            mainCam.SetActive(true);
-            currentActiveCamera = mainCam.GetComponent<Camera>();
-        }
-    }
 
-    //Throw a raycast and check if it's a planet, if it's a planet camera will look at it and will play a short sound
+    //Throw a raycast and check if it's a planet, if it's a planet camera will look at it and will play a sound
+    //and the the listeners will get informed about the object and do their actions
     public void SwapCameraOnPlanetClick()
     {
         if(Input.GetMouseButtonDown(0))
@@ -55,13 +56,13 @@ public class GameManager : MonoBehaviour
                 if(hit.collider.gameObject.CompareTag("SpaceObject"))
                 {
                     if(target == hit.collider.gameObject.transform) return;
+                    targetedPlanet = hit.collider.gameObject;
+                    if(OnObjectClicked != null) OnObjectClicked((GameObject)targetedPlanet);
+
                     target = hit.collider.gameObject.transform;
-                    currentSelectedPlanet = target.gameObject;
-                    mainCam.SetActive(false);
-                    planetCam.SetActive(true);
-                    PlanetCameraController pCamController = planetCam.GetComponent<PlanetCameraController>();
-                    currentActiveCamera = planetCam.GetComponent<Camera>();
-                    pCamController.ChangeTarget(target);
+
+                    cameraSystem.transform.position = target.position;
+                    audioSource = target.GetComponent<AudioSource>();
 
                     int randomRange = Random.Range(0,1);
                     PlayAudio(randomRange);
