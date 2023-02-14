@@ -38,13 +38,23 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
+        EndGame();
         SwapCameraOnPlanetClick();
     }
 
+    #region custom methods
+
+    private void EndGame()
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
+    }
 
     //Throw a raycast and check if it's a planet, if it's a planet camera will look at it and will play a sound
     //and the the listeners will get informed about the object and do their actions
-    public void SwapCameraOnPlanetClick()
+    private void SwapCameraOnPlanetClick()
     {
         if(Input.GetMouseButtonDown(0))
         {
@@ -77,4 +87,6 @@ public class GameManager : MonoBehaviour
         if(clickSounds[track] == null)Debug.Log("The audio file is null");
         audioSource.PlayOneShot(clickSounds[track]);
     }
+
+    #endregion
 }
