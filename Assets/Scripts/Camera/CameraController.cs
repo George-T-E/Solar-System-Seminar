@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class CameraController : MonoBehaviour
 {
-    #region variables
+    /* This script is applied on an invisible object that Virtual Camera will be following
+     * and it give's to the user the ability to control it and make it move around the scene.
+     */
+
+    #region Variables & Properties
     [SerializeField]private float moveSpeed = 25;
-    private float rotateDir, mouseScroll;
+    private float rotateDir;
     [Tooltip("Camera Boundaries")]
     [SerializeField]private float 
         minX,
@@ -17,14 +21,16 @@ public class CameraController : MonoBehaviour
         maxZ;
     float distance;
     #endregion
+    #region MonoBehaviour Methods
     private void Update()
     {
         CameraMovement();
         CameraRotation();
     }
+    #endregion
+    #region Custom Methods
 
-    #region custom methods
-
+    /* Here we give limits to where the camera (player) can go when traveling around */
 
     private void CamLimits()
     {
@@ -35,10 +41,16 @@ public class CameraController : MonoBehaviour
             Mathf.Clamp(transform.position.z,minZ,maxZ)
         );
     }
-    private void CameraZoom()
+
+    /* We receive the Mouse ScrollWheel input and we return it later to use it as Camera Zoom*/
+
+    private float CameraZoom()
     {
-        mouseScroll = -(Input.GetAxisRaw("Mouse ScrollWheel") * moveSpeed);
+        return -(Input.GetAxisRaw("Mouse ScrollWheel") * moveSpeed);
     }
+
+    /* Here we apply the movement input to the object that Camera is following. */
+
     private void CameraMovement()
     {
         Vector3 inputDir = new Vector3(0,0,0);
@@ -48,10 +60,12 @@ public class CameraController : MonoBehaviour
         if(Input.GetKey(KeyCode.A)) inputDir.x = -1f;
         if(Input.GetKey(KeyCode.D)) inputDir.x = +1f;
         
-        Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x + transform.up * mouseScroll;
+        Vector3 moveDir = transform.forward * inputDir.z + transform.right * inputDir.x + transform.up * CameraZoom();
         transform.position += moveDir * moveSpeed * Time.deltaTime;
         CamLimits();
     }
+
+    /* Here we apply rotation to the object that Camera is following. */
 
     private void CameraRotation()
     {

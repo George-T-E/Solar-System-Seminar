@@ -4,7 +4,16 @@ using UnityEngine;
 
 public class PlanetInformation : MonoBehaviour
 {
-
+    /* This script is attached on a 3D object (Planet)
+     * and is used to store the name of the Planet
+     * and some information about planet.
+     * Then the UI Manager will try to get that information
+     * and show it to the user
+     */
+    #region Variables & Properties
+    /*We are encapsulating our information and we use
+     * get and set to access it
+     */
     [SerializeField]private string planetName;
     public string PlanetName
     {
@@ -19,5 +28,5 @@ public class PlanetInformation : MonoBehaviour
         get { return planetInfo; }
         set { planetInfo = value; }
     }
-    
+    #endregion
 }
