@@ -3,12 +3,15 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using Cinemachine;
+/// <summary>
+/// Attach this script on any Object and it will handle the proccess to change
+/// the UI when the user clicks on a Planet by using the Event OnObjectClicked
+/// that is created by the GameManager
+/// </summary>
 public class UIManager : MonoBehaviour
 {
-    /* This script needs to be attached to an invisible object and it will handle
-     * the UI text information when we select an object that is a planet and has the
-     * PlanetInfo class on it by observing an Event of the GameManager.
-     */
+
+     
     #region Variables & Properties
     [SerializeField]private TextMeshProUGUI
     planetNameText,
@@ -18,6 +21,7 @@ public class UIManager : MonoBehaviour
 
     #endregion
     #region MonoBehaviour Methods
+
     /* Here we register our method to the Event and we unregister when is needed */
     private void OnEnable()
     {
@@ -33,11 +37,17 @@ public class UIManager : MonoBehaviour
     }
     #endregion
     #region custom methods
-    /* This is the method we call when the Event is trigerred 
-     * and we receive information of the PlanetInfo class that
-     * is on the planet object and then we replace the UI text
-     * with the info found on the planet
-     */
+
+    /// <summary>
+    /// When the user clicks on an planet object we call this method
+    /// that takes the planet as an object and then receive's the
+    /// information of the PlanetInfo class that
+    /// is attached to the planet object and then we replace the UI text
+    /// with the new PlanetInfo.
+    /// (Assign this to OnEnable() GameManager.OnObjectClicked += ChangeTarget;)
+    /// (Assign this to OnDisable() GameManager.OnObjectClicked -= ChangeTarget;)
+    /// </summary>
+    /// <param name="obj">This is the new planet object the user clicked.</param>
     private void ChangeTarget(GameObject obj)
     {
         planetInfo = obj.GetComponent<PlanetInformation>();

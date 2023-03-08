@@ -2,13 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// This script can be attached to any 3D object
+/// and it will make it rotate around the target
+/// on the X Y Z axis. and if there is no target
+/// it will rotate around itself.
+/// </summary>
 public class Rotate : MonoBehaviour
 {
-    /* This script can be attached to any 3D object
-     * and it will make it rotate around the target
-     * on the X Y Z axis. and if there is no target
-     * it will rotate around itself
-     */
+
+    
     #region Variables & Properties
     /*variables here should be [SerializeField] private instead of public
      * you can change it but you need to attach the targets to the planets

@@ -1,13 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// This script needs to be applied on an object and the Virtual Camera will follow it.
+/// It also gives the ability to control the camera and move around the 3D world.
+/// </summary>
 public class CameraController : MonoBehaviour
 {
-    /* This script is applied on an invisible object that Virtual Camera will be following
-     * and it give's to the user the ability to control it and make it move around the scene.
-     */
-
     #region Variables & Properties
     [SerializeField]private float moveSpeed = 25;
     private float rotateDir;
@@ -30,8 +29,9 @@ public class CameraController : MonoBehaviour
     #endregion
     #region Custom Methods
 
-    /* Here we give limits to where the camera (player) can go when traveling around */
-
+    /// <summary>
+    /// We give limits to the camera(player) position in the 3D World.
+    /// </summary>
     private void CamLimits()
     {
         transform.position = new Vector3
@@ -42,14 +42,19 @@ public class CameraController : MonoBehaviour
         );
     }
 
-    /* We receive the Mouse ScrollWheel input and we return it later to use it as Camera Zoom*/
-
+    /// <summary>
+    /// We receive the Mouse ScrollWheel input and we return it later to use it as Camera Zoom
+    /// </summary>
+    /// <returns>Negative mouse scrollwheel * moveSpeed</returns>
     private float CameraZoom()
     {
         return -(Input.GetAxisRaw("Mouse ScrollWheel") * moveSpeed);
     }
 
-    /* Here we apply the movement input to the object that Camera is following. */
+    /// <summary>
+    /// Here we apply the movement input to the object that Camera is following.
+    /// It needs to be inside the Update() method to work.
+    /// </summary>
 
     private void CameraMovement()
     {
@@ -65,7 +70,10 @@ public class CameraController : MonoBehaviour
         CamLimits();
     }
 
-    /* Here we apply rotation to the object that Camera is following. */
+    /// <summary>
+    /// Here we apply rotation to the object that Camera is following.
+    /// It needs to be inside the Update() method to work.
+    /// </summary>
 
     private void CameraRotation()
     {

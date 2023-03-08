@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+/// <summary>
+/// This script is used for the Minimap Camera
+/// and it changes the focus of the Camera when
+/// we select a new Planet.
+/// </summary>
 public class MinimapCamera : MonoBehaviour
 {
-    /*This script is used for the Minimap Camera
-     * and it changes the focus of the Camera
-     */
     #region Variables & Properties
     private GameObject currentTarget;
     private PlanetInformation planetInfo;
@@ -34,9 +35,13 @@ public class MinimapCamera : MonoBehaviour
     }
     #endregion
     #region custom methods
-    /* It checks the name of the planet and
-     * changes accordingly the Z Axis of the Minimap Camera
-     */
+    /// <summary>
+    /// It checks the name of the currently selected Planet
+    /// and adjusts the Z Axis of the Minimap Camera. Because
+    /// every planet has different size so the camera needs to be
+    /// adjusted differently.
+    /// (It needs to be inside Update() Method in order to work);
+    /// </summary>
     private void MiniMapCameraPosition()
     {
         if (currentTarget != null)
@@ -72,9 +77,15 @@ public class MinimapCamera : MonoBehaviour
             }
         }
     }
-    /* This script is Changing the focus of
-     * the Minimap Camera
-     */
+    /// <summary>
+    /// This script is will change the position of
+    /// and the focus of the Minimap Camera.
+    /// (Script needs to register and unregister OnEnable() and OnDisable()
+    /// GameManager.OnObjectClicked += ChangeFocus;
+    /// GameManager.OnObjectClicked -= ChangeFocus;)
+    /// </summary>
+    /// <param name="target">The target is the Object the User Clicked</param>
+
     private void ChangeFocus(GameObject target)
     {
         currentTarget = target;
