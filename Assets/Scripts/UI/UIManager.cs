@@ -16,6 +16,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]private TextMeshProUGUI
     planetNameText,
     planetInfoText;
+    [SerializeField] private GameObject planetBgUI;
     public PlanetInformation planetInfo;
     public Vector3 offset;
 
@@ -50,14 +51,24 @@ public class UIManager : MonoBehaviour
     /// <param name="obj">This is the new planet object the user clicked.</param>
     private void ChangeTarget(GameObject obj)
     {
-        planetInfo = obj.GetComponent<PlanetInformation>();
+        if(obj != null)
+        {
+            if(obj.name == "Empty")
+            {
+                planetBgUI.SetActive(false);
+            }
+            else
+            {
+                planetInfo = obj.GetComponent<PlanetInformation>();
+                planetBgUI.SetActive(true);
 
-        if(planetInfo == null)Debug.LogError("Planet info is null for some reason!");
-        if(!planetNameText.gameObject.activeInHierarchy)planetNameText.gameObject.SetActive(true);
-        if(!planetInfoText.gameObject.activeInHierarchy)planetInfoText.gameObject.SetActive(true);
+                planetNameText.text = planetInfo.PlanetName;
+                planetInfoText.text = planetInfo.PlanetInfo;
+            }
 
-        planetNameText.text = planetInfo.PlanetName;
-        planetInfoText.text = planetInfo.PlanetInfo;
+        }
+
+
     }
     #endregion
 }

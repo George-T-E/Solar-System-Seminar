@@ -29,11 +29,15 @@ public class GameManager : MonoBehaviour
 
     [SerializeField]ICinemachineCamera activeVirtualCamera;
     Transform target;
+
+    GameObject emptyObject;
     #endregion
 
     void Start()
     {
+        emptyObject = new GameObject("Empty");
         activeVirtualCamera = CinemachineCore.Instance.GetActiveBrain(0).ActiveVirtualCamera;
+
     }
 
     void Update()
@@ -63,9 +67,9 @@ public class GameManager : MonoBehaviour
 
             if(Physics.Raycast(ray, out hit))
             {
+                Debug.Log("raycast inside");
                 if(hit.collider.gameObject.CompareTag("SpaceObject"))
                 {
-                    if(target == hit.collider.gameObject.transform) return;
                     targetedPlanet = hit.collider.gameObject;
                     if(OnObjectClicked != null) OnObjectClicked((GameObject)targetedPlanet);
 
@@ -77,6 +81,10 @@ public class GameManager : MonoBehaviour
                     int randomRange = Random.Range(0,1);
                     PlayAudio(randomRange);
                 }
+            }
+            else
+            {
+                OnObjectClicked(emptyObject);
             }
         }
     }

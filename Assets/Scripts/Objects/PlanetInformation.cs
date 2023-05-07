@@ -12,7 +12,7 @@ using static UnityEngine.UIElements.UxmlAttributeDescription;
 public class PlanetInformation : MonoBehaviour
 {
 
-    
+    //TODO Scritpable Object with the planet informations
     #region Variables & Properties
     /*We are encapsulating our information and we use
      * get and set to access it

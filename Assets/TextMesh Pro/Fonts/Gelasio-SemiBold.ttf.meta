@@ -1,0 +1,22 @@
+fileFormatVersion: 2
+guid: 0b44d3beb3d977c45b16177ecfaf9ad6
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Gelasio SemiBold
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: b47e4fe75ac7cf9468554aeb37cd3161, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
