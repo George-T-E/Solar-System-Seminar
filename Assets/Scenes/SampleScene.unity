@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 92911494}
-  m_IndirectSpecularColor: {r: 0.0070680254, g: 0.006119434, b: 0.0075365608, a: 1}
+  m_IndirectSpecularColor: {r: 0.006744549, g: 0.0058738724, b: 0.007154196, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -822,6 +822,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2036293200357780515, guid: 3c42d0ad37d1eae448cdce3b98a5381c, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2036293200357780515, guid: 3c42d0ad37d1eae448cdce3b98a5381c, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 2036293200357780515, guid: 3c42d0ad37d1eae448cdce3b98a5381c, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
+      objectReference: {fileID: 0}
     - target: {fileID: 2036293200357780516, guid: 3c42d0ad37d1eae448cdce3b98a5381c, type: 3}
       propertyPath: m_AdditionalShaderChannelsFlag
       value: 25
@@ -1024,6 +1036,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 8489456229655109214, guid: 122e4c1419e431c4c8ccec00ff8e7828, type: 2}
     - target: {fileID: 2448044931114036117, guid: 553ff957650c29044924ba24b23be253, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448044931114036117, guid: 553ff957650c29044924ba24b23be253, type: 3}
       propertyPath: m_VerticalAlignment
       value: 256
       objectReference: {fileID: 0}
@@ -1110,6 +1126,22 @@ PrefabInstance:
     - target: {fileID: 2448044931452018281, guid: 553ff957650c29044924ba24b23be253, type: 3}
       propertyPath: m_Name
       value: Canvas_Planets_Info
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448044931452018283, guid: 553ff957650c29044924ba24b23be253, type: 3}
+      propertyPath: m_UiScaleMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448044931452018283, guid: 553ff957650c29044924ba24b23be253, type: 3}
+      propertyPath: m_MatchWidthOrHeight
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448044931452018283, guid: 553ff957650c29044924ba24b23be253, type: 3}
+      propertyPath: m_ReferenceResolution.x
+      value: 1920
+      objectReference: {fileID: 0}
+    - target: {fileID: 2448044931452018283, guid: 553ff957650c29044924ba24b23be253, type: 3}
+      propertyPath: m_ReferenceResolution.y
+      value: 1080
       objectReference: {fileID: 0}
     - target: {fileID: 2448044931452018285, guid: 553ff957650c29044924ba24b23be253, type: 3}
       propertyPath: m_Pivot.x
@@ -1251,6 +1283,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: 8489456229655109214, guid: 122e4c1419e431c4c8ccec00ff8e7828, type: 2}
+    - target: {fileID: 2448044933212028572, guid: 553ff957650c29044924ba24b23be253, type: 3}
+      propertyPath: m_enableAutoSizing
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 553ff957650c29044924ba24b23be253, type: 3}
 --- !u!224 &2448044931140588057 stripped
