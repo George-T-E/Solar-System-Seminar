@@ -67,7 +67,6 @@ public class GameManager : MonoBehaviour
 
             if(Physics.Raycast(ray, out hit))
             {
-                Debug.Log("raycast inside");
                 if(hit.collider.gameObject.CompareTag("SpaceObject"))
                 {
                     targetedPlanet = hit.collider.gameObject;
