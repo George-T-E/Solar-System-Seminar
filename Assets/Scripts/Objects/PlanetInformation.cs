@@ -12,11 +12,12 @@ using static UnityEngine.UIElements.UxmlAttributeDescription;
 public class PlanetInformation : MonoBehaviour
 {
 
-    //TODO Scritpable Object with the planet informations
+
     #region Variables & Properties
     /*We are encapsulating our information and we use
      * get and set to access it
      */
+    [SerializeField]PlanetSO planetCard;
     [SerializeField]private string planetName;
     public string PlanetName
     {
@@ -30,6 +31,28 @@ public class PlanetInformation : MonoBehaviour
     {
         get { return planetInfo; }
         set { planetInfo = value; }
+    }
+
+    private AudioClip planetNarrator;
+
+    public AudioClip PlanetNarrator
+    {
+        get { return planetNarrator; }
+        set { planetNarrator = value; }
+    }
+
+
+    private void Start()
+    {
+        if (planetCard == null)
+        {
+            Debug.Log("Planet card is missing from the planet");
+            return;
+        }
+        planetName = planetCard.PlanetName;
+        planetInfo = planetCard.PlanetInfo1;
+        planetNarrator = planetCard.PlanetNarratorClip;
+
     }
     #endregion
 }

@@ -77,8 +77,9 @@ public class GameManager : MonoBehaviour
                     cameraSystem.transform.position = target.position;
                     audioSource = target.GetComponent<AudioSource>();
 
-                    int randomRange = Random.Range(0,1);
-                    PlayAudio(randomRange);
+                    AudioClip planetAudio = targetedPlanet.GetComponent<PlanetInformation>().PlanetNarrator;
+
+                    if (planetAudio != null) audioSource.PlayOneShot(planetAudio);
                 }
             }
             else
