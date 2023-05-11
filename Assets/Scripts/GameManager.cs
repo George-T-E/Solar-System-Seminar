@@ -77,9 +77,9 @@ public class GameManager : MonoBehaviour
                     cameraSystem.transform.position = target.position;
                     audioSource = target.GetComponent<AudioSource>();
 
-                    AudioClip planetAudio = targetedPlanet.GetComponent<PlanetInformation>().PlanetNarrator;
+                    AudioClip planetAudio = targetedPlanet.GetComponent<CelestialBodyInfo>().PlanetNarrator;
 
-                    if (planetAudio != null) audioSource.PlayOneShot(planetAudio);
+                    if (planetAudio != null) PlayAudio(planetAudio);
                 }
             }
             else
@@ -92,9 +92,25 @@ public class GameManager : MonoBehaviour
     //give it id of a sound and it will play it
     public void PlayAudio(int track)
     {
-        if(clickSounds[track] == null)Debug.Log("The audio file is null");
+        if(clickSounds[track] == null)
+        {
+            Debug.Log("The audio file is null");
+            return;
+        }
         audioSource.PlayOneShot(clickSounds[track]);
     }
 
+    public void PlayAudio(AudioClip clip)
+    {
+        if (clip == null)
+        {
+            Debug.Log("The audio file is null");
+            return;
+        }
+
+        audioSource.Stop();
+        audioSource.clip = clip;
+        audioSource.Play();
+    }
     #endregion
 }

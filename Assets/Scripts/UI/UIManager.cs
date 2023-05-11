@@ -15,9 +15,10 @@ public class UIManager : MonoBehaviour
     #region Variables & Properties
     [SerializeField]private TextMeshProUGUI
     planetNameText,
-    planetInfoText;
+    planetInfoText,
+    planetInfoText2;
     [SerializeField] private GameObject planetBgUI;
-    public PlanetInformation planetInfo;
+    public CelestialBodyInfo planetInfo;
     public Vector3 offset;
 
     #endregion
@@ -59,16 +60,15 @@ public class UIManager : MonoBehaviour
             }
             else
             {
-                planetInfo = obj.GetComponent<PlanetInformation>();
+                planetInfo = obj.GetComponent<CelestialBodyInfo>();
                 planetBgUI.SetActive(true);
 
                 planetNameText.text = planetInfo.PlanetName;
                 planetInfoText.text = planetInfo.PlanetInfo;
+                planetInfoText2.text = planetInfo.PlanetInfo2;
             }
 
         }
-
-
     }
     #endregion
 }

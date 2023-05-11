@@ -13,7 +13,7 @@ namespace CameraScripts
     {
         #region Variables & Properties
         private GameObject currentTarget;
-        private PlanetInformation planetInfo;
+        private CelestialBodyInfo planetInfo;
         #endregion
         #region MonoBehaviour Methods
         /* We register and unregister our ChangeFocus method to
@@ -95,7 +95,7 @@ namespace CameraScripts
             transform.position = new Vector3(0, 0, -1);
             transform.parent = currentTarget.transform;
             transform.LookAt(currentTarget.transform);
-            planetInfo = currentTarget.GetComponent<PlanetInformation>();
+            planetInfo = currentTarget.GetComponent<CelestialBodyInfo>();
         }
 
         #endregion
